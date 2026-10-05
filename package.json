@@ -1,0 +1,15 @@
+{
+  "name": "newsphere",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NewsSphere — a simple news kiosk browser (Tauri v2 + Android)",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "tauri dev",
+    "serve": "npx --yes live-server src --port=5500 --host=0.0.0.0 --no-browser",
+    "build:android": "tauri android build --apk --debug"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

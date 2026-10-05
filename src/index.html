@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>NewsSphere</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="appbar">
+    <div class="brand">
+      <span class="logo">📰</span>
+      <div>
+        <h1>NewsSphere</h1>
+        <p class="tagline">Your 5 trusted news sources, one tap away</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="grid" id="sources" aria-live="polite">
+      <!-- source cards injected by main.js -->
+    </section>
+    <p class="hint" id="hint">Loading sources…</p>
+  </main>
+
+  <!-- Bottom navigation bar -->
+  <nav class="bottombar" aria-label="Main navigation">
+    <button class="navbtn is-active" data-action="home">
+      <span class="ico">🏠</span><small>Home</small>
+    </button>
+    <button class="navbtn" data-action="refresh">
+      <span class="ico">🔄</span><small>Refresh</small>
+    </button>
+    <button class="navbtn" data-action="back">
+      <span class="ico">⬅️</span><small>Back</small>
+    </button>
+    <button class="navbtn" data-action="share">
+      <span class="ico">🔗</span><small>Share</small>
+    </button>
+    <button class="navbtn" data-action="about">
+      <span class="ico">ℹ️</span><small>About</small>
+    </button>
+  </nav>
+
+  <dialog id="about" class="sheet">
+    <h2>NewsSphere</h2>
+    <p>A simple kiosk reader that opens trusted news sources in an in-app viewer.</p>
+    <p class="muted">Sources are managed by the developer in <code>sites.json</code>. No tracking, no accounts.</p>
+    <button class="btn-close" data-action="close-about">Close</button>
+  </dialog>
+
+  <script src="main.js"></script>
+</body>
+</html>
