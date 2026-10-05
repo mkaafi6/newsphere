@@ -24,13 +24,16 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Android NDK + platforms
+      - name: Locate Android cmdline-tools
         run: |
-          sdkmanager --install "ndk;26.1.10909125" "platform-tools" "platforms;android-34" "build-tools;34.0.0"
-          yes | sdkmanager --licenses || true
+          CMDLINE=$(find "$ANDROID_SDK_ROOT/cmdline-tools" -maxdepth 2 -name sdkmanager -printf '%h\n' | head -1)
+          echo "cmdline-tools: $CMDLINE"
+          echo "$CMDLINE" >> "$GITHUB_PATH"
+
+      - name: Install Android NDK + packages
+        run: |
+          sdkmanager --install "ndk;26.1.10909125" "platform-tools" "platforms;android-34"
+          yes | sdkmanager --licenses >/dev/null 2>&1 || true
           echo "NDK_HOME=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> "$GITHUB_ENV"
           echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> "$GITHUB_ENV"
 
