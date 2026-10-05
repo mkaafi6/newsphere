@@ -49,10 +49,28 @@ npm run serve            # preview the frontend at http://localhost:5500
 git add -A && git commit -m "..." && git push   # rebuilds site + APK in CI
 ```
 
+## Status
+
+- [x] GitHub repo created + Pages enabled.
+- [x] Frontend live: https://mkaafi6.github.io/newsphere/
+- [x] APK build workflow passes — run 37253493792 (7m45s) produced a valid
+      universal debug APK artifact `NewsSphere-debug-apk` (~117 MB zipped).
+- [ ] Confirm the APK installs on the phone and the webview opens the sources.
+
+### CI lessons learned (build-apk.yml)
+
+- `android-actions/setup-android@v3` FAILS (tries to install the removed `tools`
+  package). Do NOT use it.
+- `$ANDROID_SDK_ROOT` is NOT set on the runner — search known locations for
+  `sdkmanager` and add its dir to `GITHUB_PATH`, then set ANDROID_SDK_ROOT/ANDROID_HOME.
+- Runner already has the Android SDK; NDK 26.1.10909125 is installed via `sdkmanager`.
+- Build uses a **debug** APK (auto-signed) → installable without a keystore.
+
 ## TODO
 
-- [ ] Create the GitHub repo + enable Pages; confirm both workflows pass.
-- [ ] Confirm the debug APK installs and the webview navigates to the sources.
+- [ ] Install the APK and verify navigation.
+- [ ] Optional: shrink APK — build arm64-only and/or add a release keystore
+      (custom universal debug is ~458 MB installed).
 - [ ] Add an injected floating "Home" button over third-party pages (optional).
-- [ ] Optional: release signing keystore; ad-block via local proxy.
-- [ ] User updates the source list; ask me to notify when it's time.
+- [ ] Optional: ad-block via local proxy.
+- [ ] User maintains `src/sites.json`; ask me when the source list changes.
